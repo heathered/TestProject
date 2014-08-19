@@ -1,0 +1,17 @@
+<form action="/groomer" method="get">
+	<input type="text" name="id" placeholder="Groomer ID"></input>
+</form>
+
+<form action="/pet" method="get">
+	<input type="text" name="id" placeholder="Pet ID"></input>
+</form>
+
+<h2>Groomers</h2>
+<% Groomer.all.each do |g| %>
+	<a href="/groomer/<%= g.id %>"><p>Name: <%= g.name %></p></a>
+<% end %>
+
+<h2>Pets</h2> <a href="/pet/new">Add new pet</a>
+<% Pet.all.each do |p| %>
+	<a href="/pet/<%= p.id %>"><p>Name: <%= p.name %></p></a>
+<% end %>

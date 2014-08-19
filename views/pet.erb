@@ -1,0 +1,65 @@
+<p><a href="../">Home</a></p>
+
+<p>Pet Name: <%= @p.name %></p>
+
+<form action="/appt" method="post">
+	<input type="hidden" name="pet_id" value="<%= @p.id %>"></input>
+	<select name="groomer_id">
+		<% if @p.groomers == [] %>
+			<% @groomers.each do |g| %>
+				<option value="<%= g.id %>"><%= g.name %></option>
+			<% end %>
+		<% else %>
+			<% @p.groomers.each do |g| %>
+				<option value="<%= g.id %>"><%= g.name %></option>
+			<% end %>
+		<% end %>	
+	</select>
+	<input type="text" name="date" placeholder="Appointment Date"></input>
+	<input type="submit" value="New Appointment"></input>
+</form>
+
+<h3>Upcoming Appointments</h3>
+<% @appts.each do |a| %>
+	<% if a.groomer_id && a.pet_id %>
+		<% if a.date > Time.now %>
+			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
+				<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+				<a href="/appt/<%= a.id %>">Info</a>
+			</p>
+		<% end %>
+	<% end %>
+<% end %>
+
+<h3>Past Appointments</h3>
+<% @appts.each do |a| %>
+	<% if a.groomer_id && a.pet_id %>
+		<% if a.date < Time.now %>
+			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
+				<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+				<a href="/appt/<%= a.id %>">Info</a>
+			</p>
+		<% end %>
+	<% end %>
+<% end %>
+
+
+<h3>Notes</h3>
+
+<% @appts.each do |n| %>
+	<% if n.note %>
+		<p><%= n.date.strftime("%m/%d/%Y") %> | <%= n.note.note %> - 
+			<a href="/appt/<%= n.id %>">Edit</a>
+		</p>
+	<% end %>
+<% end %>
+	
+
+<form method="get" action="/pet/<%= @p.id %>/pdf">
+	<input type="submit" value="Notes -> PDF"></input>
+</form>
+
+<form method="post" action="/pet/<%= @p.id %>">
+	<input type="hidden" name="_method" value="delete"></input>
+	<input type="submit" value="Delete Pet"></input>
+</form>

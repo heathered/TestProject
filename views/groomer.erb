@@ -1,0 +1,28 @@
+<p><a href="../">Home</a></p>
+
+<p>Name: <%= @g.name %></p>
+
+<h3>Upcoming Appointments</h3>
+<% @appts.each do |a| %>
+	<% if a.date > Time.now %>
+		<p>With <a href="/pet/<%= a.pet.id %>"><%= a.pet.name %></a> on 
+			<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+			<a href="/appt/<%= a.id %>">Info</a>
+		</p>
+	<% end %>
+<% end %>
+
+<h3>Past Appointments</h3>
+<% @appts.each do |a| %>
+	<% if a.date < Time.now %>
+		<p>With <a href="/pet/<%= a.pet.id %>"><%= a.pet.name %></a> on 
+			<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+			<a href="/appt/<%= a.id %>">Info</a>
+		</p>
+	<% end %>
+<% end %>
+
+<form method="post" action="/groomer/<%= @g.id %>">
+	<input type="hidden" name="_method" value="delete"></input>
+	<input type="submit" value="Delete Groomer"></input>
+</form>
