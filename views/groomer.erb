@@ -4,9 +4,9 @@
 
 <h3>Upcoming Appointments</h3>
 <% @appts.each do |a| %>
-	<% if a.date > Time.now %>
+	<% if a.upcoming? %>
 		<p>With <a href="/pet/<%= a.pet.id %>"><%= a.pet.name %></a> on 
-			<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+			<%= a.prettytime %> 
 			<a href="/appt/<%= a.id %>">Info</a>
 		</p>
 	<% end %>
@@ -14,9 +14,9 @@
 
 <h3>Past Appointments</h3>
 <% @appts.each do |a| %>
-	<% if a.date < Time.now %>
+	<% if a.past? %>
 		<p>With <a href="/pet/<%= a.pet.id %>"><%= a.pet.name %></a> on 
-			<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+			<%= a.prettytime %> 
 			<a href="/appt/<%= a.id %>">Info</a>
 		</p>
 	<% end %>

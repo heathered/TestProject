@@ -1,10 +1,13 @@
-require "pry"
+# require "pry"
+# require "sinatra"
+# require "sinatra/reloader"
+# require "sinatra/activerecord"
+# require "sqlite3"
 
-require "sinatra"
-require "sinatra/reloader"
-require "sinatra/activerecord"
+require 'rubygems'
+require 'bundler'
 
-require "sqlite3"
+Bundler.require
 
 require_relative "./models/appt.rb"
 require_relative "./models/pet.rb"
@@ -13,7 +16,7 @@ require_relative "./models/note.rb"
 require_relative "./models/misc.rb"
 
 get "/" do
-
+  
   erb :home
 end
 
@@ -135,10 +138,13 @@ post "/appt" do
   a.groomer_id = params["groomer_id"]
   a.set_date(params["date"])
   
-  binding.pry
-  a.save
-  
-  redirect "/pet/#{params["pet_id"]}"
+  if a.valid?
+    a.save
+    redirect "/pet/#{params["pet_id"]}"
+  else
+    
+  end
+    
 end
 
 # binding.pry

@@ -21,10 +21,10 @@
 
 <h3>Upcoming Appointments</h3>
 <% @appts.each do |a| %>
-	<% if a.groomer_id && a.pet_id %>
-		<% if a.date > Time.now %>
+	<% if a.valid_appt? %>
+		<% if a.upcoming? %>
 			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
-				<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+				<%= a.prettytime %> 
 				<a href="/appt/<%= a.id %>">Info</a>
 			</p>
 		<% end %>
@@ -33,10 +33,10 @@
 
 <h3>Past Appointments</h3>
 <% @appts.each do |a| %>
-	<% if a.groomer_id && a.pet_id %>
-		<% if a.date < Time.now %>
+	<% if a.valid_appt? %>
+		<% if a.past? %>
 			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
-				<%= a.date.strftime("%A, %B #{a.date.day.ordinalize} %Y @ %l:%M %p") %> 
+				<%= a.prettytime %> 
 				<a href="/appt/<%= a.id %>">Info</a>
 			</p>
 		<% end %>
@@ -48,7 +48,7 @@
 
 <% @appts.each do |n| %>
 	<% if n.note %>
-		<p><%= n.date.strftime("%m/%d/%Y") %> | <%= n.note.note %> - 
+		<p><%= n.basictime %> | <%= n.note.note %> - 
 			<a href="/appt/<%= n.id %>">Edit</a>
 		</p>
 	<% end %>

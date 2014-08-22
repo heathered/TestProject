@@ -1,5 +1,5 @@
 
-require "prawn"
+# require "prawn"
 
 class Pet < ActiveRecord::Base
   # belongs_to :owner # foreign key - owner_id
