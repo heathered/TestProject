@@ -25,6 +25,7 @@ GEM
     minitest (5.4.0)
     multi_json (1.10.1)
     pdf-core (0.2.5)
+    pg (0.17.1)
     prawn (1.2.1)
       pdf-core (~> 0.2.5)
       ttfunk (~> 1.2.0)
@@ -66,6 +67,7 @@ PLATFORMS
 
 DEPENDENCIES
   chronic
+  pg
   prawn
   pry
   sinatra
