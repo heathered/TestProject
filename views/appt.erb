@@ -2,26 +2,28 @@
 
 <p><a href="/pet/<%= @a.pet.id %>">Back</a></p>
 
-<% if @a.note.nil? %>
-	<form action="/appt/<%= @a.id %>/note" method="post">
-		<input type="hidden" name="appt_id" value="<%= @a.id %>"></input>
-		<textarea name="note" placeholder="Enter notes" cols="50" rows="5"></textarea>
-		<input type="submit" value="Create Note"></input>
-	</form>
-<% else %>
-	<form action="/appt/<%= @a.id %>/edit" method="post">
-		<input type="hidden" name="appt_id" value="<%= @a.id %>"></input>
-		<textarea name="note" placeholder="Enter notes" cols="50" rows="5"><%= @a.note.note %></textarea>
-		<input type="submit" value="Edit Note"></input>
-	</form>
-<% end %>
+<div class="form">
+	<% if @a.note.nil? %>
+		<form action="/appt/<%= @a.id %>/note" method="post">
+			<input type="hidden" name="appt_id" value="<%= @a.id %>"></input>
+			<textarea name="note" placeholder="Enter notes" cols="50" rows="5"></textarea>
+			<input type="submit" value="Create Note"></input>
+		</form>
+	<% else %>
+		<form action="/appt/<%= @a.id %>/edit" method="post">
+			<input type="hidden" name="appt_id" value="<%= @a.id %>"></input>
+			<textarea name="note" placeholder="Enter notes" cols="50" rows="5"><%= @a.note.note %></textarea>
+			<input type="submit" value="Edit Note"></input>
+		</form>
+	<% end %>
 
-<form method="post" action="/appt/<%= @a.id %>/deletenote">
-	<input type="hidden" name="_method" value="delete"></input>
-	<input type="submit" value="Delete Note"></input>
-</form>
+	<form method="post" action="/appt/<%= @a.id %>/deletenote">
+		<input type="hidden" name="_method" value="delete"></input>
+		<input type="submit" value="Delete Note"></input>
+	</form>
 
-<form method="post" action="/appt/<%= @a.id %>/deleteappt">
-	<input type="hidden" name="_method" value="delete"></input>
-	<input type="submit" value="Delete Appointment"></input>
-</form>
+	<form method="post" action="/appt/<%= @a.id %>/deleteappt">
+		<input type="hidden" name="_method" value="delete"></input>
+		<input type="submit" value="Delete Appointment"></input>
+	</form>
+</div>

@@ -6,12 +6,24 @@
 	<input type="text" name="id" placeholder="Pet ID"></input>
 </form> -->
 
-<h2>Groomers</h2> <a href="/groomer/new">Add new groomer</a>
-<% Groomer.all.each do |g| %>
-	<a href="/groomer/<%= g.id %>"><p><%= g.name %></p></a>
-<% end %>
+<div class="cf">
+	<h2>Groomers</h2> <h3><a href="/groomer/new">Add</a></h3>
+</div>
+<div class="cf">	
+	<ul>
+		<% Groomer.all.each do |g| %>
+			<li><a href="/groomer/<%= g.id %>"><p><%= g.name %></p></a></li>
+		<% end %>
+	</ul>
+</div>
 
-<h2>Pets</h2> <a href="/pet/new">Add new pet</a>
-<% Pet.all.each do |p| %>
-	<a href="/pet/<%= p.id %>"><p><%= p.name %></p></a>
-<% end %>
+<div class="cf">
+	<h2>Pets</h2> <h3><a href="/pet/new">Add</a></h3>
+</div>
+<div class="cf">
+	<ul>
+		<% Pet.all.each do |p| %>
+			<li><a href="/pet/<%= p.id %>"><p><%= p.name %></p></a></li>
+		<% end %>
+	</ul>
+</div>

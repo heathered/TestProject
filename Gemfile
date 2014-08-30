@@ -6,6 +6,7 @@ gem "sinatra-reloader"
 gem "sinatra-activerecord"
 gem "chronic"
 gem "prawn"
+gem "activesupport"
 
 group :development, :test do
   gem 'sqlite3'

@@ -11,11 +11,11 @@ class Appt < ActiveRecord::Base
   end
   
   def prettytime
-    self.date.strftime("%A, %B #{self.date.day.ordinalize} %Y @ %l:%M %p")
+    self.date.localtime.strftime("%A, %B #{self.date.day.ordinalize} %Y @ %l:%M %p")
   end
   
   def basictime
-    self.date.strftime("%m/%d/%Y")
+    self.date.localtime.strftime("%m/%d/%Y")
   end
   
   def upcoming?

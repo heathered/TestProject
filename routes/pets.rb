@@ -31,3 +31,11 @@ get "/pet/:id/pdf" do
   erb :pdf
   # redirect "/pet/#{@p.id}"
 end
+
+post "/pet/new" do
+  p = Pet.new
+  p.name = params["name"]
+  p.save
+  
+  redirect "/pet/#{p.id}"
+end

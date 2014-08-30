@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825155755) do
+ActiveRecord::Schema.define(version: 20140829174123) do
 
   create_table "appts", force: true do |t|
     t.integer  "groomer_id"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20140825155755) do
 
   create_table "groomers", force: true do |t|
     t.string "name"
+  end
+
+  create_table "groomers_pets", force: true do |t|
+    t.integer "groomer_id"
+    t.integer "pet_id"
   end
 
   create_table "groomers_users", force: true do |t|

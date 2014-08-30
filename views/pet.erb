@@ -1,65 +1,80 @@
-<p><a href="../">Home</a></p>
+<h2><%= @p.name %></h2>
 
-<p>Pet Name: <%= @p.name %></p>
+<div class="form">
+	<form action="/appt" method="post">
+		<input type="hidden" name="pet_id" value="<%= @p.id %>"></input>
+		<select name="groomer_id">
+			<% if @p.groomers == [] %>
+				<% @groomers.each do |g| %>
+					<option value="<%= g.id %>"><%= g.name %></option>
+				<% end %>
+			<% else %>
+				<% @p.groomers.each do |g| %>
+					<option value="<%= g.id %>"><%= g.name %></option>
+				<% end %>
+			<% end %>	
+		</select>
+		<input type="text" name="date" placeholder="Appointment Date"></input>
+		<input type="submit" value="New Appointment"></input>
+	</form>
+</div>
 
-<form action="/appt" method="post">
-	<input type="hidden" name="pet_id" value="<%= @p.id %>"></input>
-	<select name="groomer_id">
-		<% if @p.groomers == [] %>
-			<% @groomers.each do |g| %>
-				<option value="<%= g.id %>"><%= g.name %></option>
-			<% end %>
-		<% else %>
-			<% @p.groomers.each do |g| %>
-				<option value="<%= g.id %>"><%= g.name %></option>
-			<% end %>
-		<% end %>	
-	</select>
-	<input type="text" name="date" placeholder="Appointment Date"></input>
-	<input type="submit" value="New Appointment"></input>
-</form>
-
-<h3>Upcoming Appointments</h3>
+<h4>Upcoming Appointments</h4>
+<ul>
 <% @appts.each do |a| %>
 	<% if a.valid_appt? %>
 		<% if a.upcoming? %>
-			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
-				<%= a.prettytime %> 
-				<a href="/appt/<%= a.id %>">Info</a>
-			</p>
+			<li>
+				<p class="name"><a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a></p>
+				<p class="date"><%= a.prettytime %></p>
+				<p class="info">
+					<a href="/appt/<%= a.id %>">Info</a>
+				</p>
+			</li>
 		<% end %>
 	<% end %>
 <% end %>
+</ul>
 
-<h3>Past Appointments</h3>
+<h4>Past Appointments</h4>
+<ul>
 <% @appts.each do |a| %>
 	<% if a.valid_appt? %>
 		<% if a.past? %>
-			<p>With <a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a> on 
-				<%= a.prettytime %> 
-				<a href="/appt/<%= a.id %>">Info</a>
-			</p>
+			<li>
+				<p class="name"><a href="/groomer/<%= a.groomer.id %>"><%= a.groomer.name %></a></p>
+				<p class="date"><%= a.prettytime %></p>
+				<p class="info">
+					<a href="/appt/<%= a.id %>">Info</a>
+				</p>
+			</li>
 		<% end %>
 	<% end %>
 <% end %>
+</ul>
 
+<h4>Notes</h4>
 
-<h3>Notes</h3>
-
+<ul>
 <% @appts.each do |n| %>
 	<% if n.note %>
-		<p><%= n.basictime %> | <%= n.note.note %> - 
-			<a href="/appt/<%= n.id %>">Edit</a>
-		</p>
+		<li>	
+				<p><%= n.basictime %></p> 
+				<p><%= n.note.note %> </p>
+				<a class="edit" href="/appt/<%= n.id %>">Edit</a>
+			</p>
+		</li>
 	<% end %>
 <% end %>
+</ul>
 	
+<div class="form">
+	<form method="get" action="/pet/<%= @p.id %>/pdf">
+		<input type="submit" value="Notes -> PDF"></input>
+	</form>
 
-<form method="get" action="/pet/<%= @p.id %>/pdf">
-	<input type="submit" value="Notes -> PDF"></input>
-</form>
-
-<form method="post" action="/pet/<%= @p.id %>">
-	<input type="hidden" name="_method" value="delete"></input>
-	<input type="submit" value="Delete Pet"></input>
-</form>
+	<form method="post" action="/pet/<%= @p.id %>">
+		<input type="hidden" name="_method" value="delete"></input>
+		<input type="submit" value="Delete Pet"></input>
+	</form>
+</div>
