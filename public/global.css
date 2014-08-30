@@ -31,7 +31,7 @@ body {
 header {
 	position: relative;
 	padding: 10px;
-	background: #A61DF7;
+	background: #C16EF7;
 }
 header img {
 	float: left;
@@ -118,7 +118,7 @@ header li a {
 }
 footer {
 	position: relative;
-	background: #A61DF7;
+	background: #C16EF7;
 }
 
 footer p {
